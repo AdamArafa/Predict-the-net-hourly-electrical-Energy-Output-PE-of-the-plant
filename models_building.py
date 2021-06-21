@@ -13,6 +13,8 @@ from sklearn.model_selection import cross_val_score
 from sklearn.model_selection import train_test_split
 from sklearn.model_selection import GridSearchCV
 from sklearn.metrics import r2_score
+from sklearn.metrics import mean_absolute_error as mae
+
 
 
 # read the data to Pandas dataframe
@@ -103,6 +105,17 @@ score = r2_score(y_test, r_predictions)
 print('The multiple Ridge model has an accuracy of {}%'.format(round(score * 100, 2))) 
 
 
+# evaluate the models by comparing predictions with actual values
+mae(y_test,lrm_predictions)
+mae(y_test,r_predictions)
+
+# multiple linear regression - test on a single value 
+pred_single_value = lrm_model.predict(X_train[0].reshape(1,-1))[0]
+actual_value = y_train[0]
+
+print('the predicted value is {} and the actual value is {}'.format(pred_single_value, actual_value))
+
+
 # dealing with the outleirs and train the model again
 # replace all the values that are higher than the 
 # the code below is exactly the same as above, the only different is the data itself, the outliers are replaced 
@@ -166,3 +179,7 @@ score = r2_score(y_test, r_predictions)
 
 #the model has an accuracy score of 93.47%
 print('The multiple Ridge model has an accuracy of {}%'.format(round(score * 100, 2))) 
+
+# evaluate the models by comparing predictions with actual values
+mae(y_test,lrm_predictions)
+mae(y_test,r_predictions)
